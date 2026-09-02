@@ -89,9 +89,10 @@ button, textarea { font: inherit; }
 .check-index { display:grid; height:1.55rem; width:1.55rem; flex:0 0 auto; place-items:center; border-radius:.45rem; background:#eaf1ff; color:#185adb; font-size:.75rem; font-weight:900; }
 
 .reference-nav { display:grid; grid-template-columns:repeat(4,1fr); gap:.75rem; }
-.reference-nav a { display:flex; min-height:3.7rem; flex-direction:column; justify-content:center; border:2px solid #dce4ef; border-radius:1rem; background:#fff; padding:.7rem 1rem; color:#173b82; font-size:.94rem; font-weight:900; text-decoration:none; box-shadow:0 3px 0 #dce4ef; }
-.reference-nav a span { margin-top:.12rem; color:#718199; font-size:.75rem; font-weight:700; }
-.reference-nav a:hover { border-color:#185adb; transform:translateY(-1px); box-shadow:0 4px 0 #185adb; }
+.reference-nav a,.reference-nav button { display:flex; min-height:3.7rem; flex-direction:column; justify-content:center; border:2px solid #dce4ef; border-radius:1rem; background:#fff; padding:.7rem 1rem; color:#173b82; font-size:.94rem; font-weight:900; text-align:left; text-decoration:none; box-shadow:0 3px 0 #dce4ef; }
+.reference-nav a span,.reference-nav button span { margin-top:.12rem; color:#718199; font-size:.75rem; font-weight:700; }
+.reference-nav a:hover,.reference-nav button:hover { border-color:#185adb; transform:translateY(-1px); box-shadow:0 4px 0 #185adb; }
+.reference-nav button[aria-expanded="true"] { border-color:#185adb; background:#eaf1ff; box-shadow:0 3px 0 #185adb; }
 
 .daily-practice-section { margin-top:.25rem; }
 .daily-practice-heading { display:flex; align-items:center; justify-content:space-between; gap:1rem; margin-bottom:1rem; border-radius:1.15rem; background:#0e2a55; padding:1rem 1.2rem; color:#fff; box-shadow:0 5px 0 #ffd84d; }
