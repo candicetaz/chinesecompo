@@ -18,6 +18,7 @@ export default function Home() {
   const [ownSentence, setOwnSentence] = useState("");
   const [completed, setCompleted] = useState<number[]>([]);
   const [saved, setSaved] = useState(false);
+  const [openReference, setOpenReference] = useState<"learning-path" | "differences" | "notebook" | null>(null);
   const lesson = LESSONS[selectedDay];
 
   useEffect(() => {
@@ -36,6 +37,13 @@ export default function Home() {
     }, 0);
     return () => window.clearTimeout(hydration);
   }, []);
+
+  useEffect(() => {
+    if (!openReference) return;
+    window.requestAnimationFrame(() => {
+      document.getElementById(openReference)?.scrollIntoView({ behavior: "smooth", block: "start" });
+    });
+  }, [openReference]);
 
   const readData = () => {
     try { return JSON.parse(window.localStorage.getItem(STORAGE_KEY) ?? "{}") as { completed?: number[]; drafts?: Record<string, string> }; }
@@ -129,11 +137,18 @@ export default function Home() {
 
         <nav className="reference-nav mb-6" aria-label="学习工具">
           <a href="#daily-practice">每日练习 <span>Daily Practice</span></a>
-          <a href="#learning-path">学习路线 <span>Learning Path</span></a>
-          <a href="#differences">中英差异 <span>Chinese vs English</span></a>
-          <a href="#notebook">我的句型本 <span>Pattern Notebook</span></a>
+          <button type="button" onClick={() => setOpenReference(openReference === "learning-path" ? null : "learning-path")} aria-expanded={openReference === "learning-path"} aria-controls="learning-path">
+            学习路线 <span>Learning Path</span>
+          </button>
+          <button type="button" onClick={() => setOpenReference(openReference === "differences" ? null : "differences")} aria-expanded={openReference === "differences"} aria-controls="differences">
+            中英差异 <span>Chinese vs English</span>
+          </button>
+          <button type="button" onClick={() => setOpenReference(openReference === "notebook" ? null : "notebook")} aria-expanded={openReference === "notebook"} aria-controls="notebook">
+            我的句型本 <span>Pattern Notebook</span>
+          </button>
         </nav>
 
+        {openReference === "learning-path" && (
         <section id="learning-path" className="reference-section mb-6 scroll-mt-5">
           <div className="reference-heading">
             <div>
@@ -158,7 +173,9 @@ export default function Home() {
             ))}
           </div>
         </section>
+        )}
 
+        {openReference === "differences" && (
         <section id="differences" className="reference-section difference-section mb-6 scroll-mt-5">
           <div className="reference-heading">
             <div>
@@ -183,6 +200,7 @@ export default function Home() {
             ))}
           </div>
         </section>
+        )}
 
         <section id="daily-practice" className="daily-practice-section scroll-mt-5">
           <div className="daily-practice-heading">
@@ -258,6 +276,7 @@ export default function Home() {
           </div>
         </section>
 
+        {openReference === "notebook" && (
         <section id="notebook" className="reference-section notebook-section mt-8 scroll-mt-5">
           <div className="reference-heading">
             <div>
@@ -285,6 +304,7 @@ export default function Home() {
             ))}
           </div>
         </section>
+        )}
       </div>
     </main>
   );
