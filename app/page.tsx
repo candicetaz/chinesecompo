@@ -1,0 +1,186 @@
+"use client";
+
+import { useEffect, useMemo, useState } from "react";
+import { BookOpen, Check, ChevronRight, Headphones, Lightbulb, RotateCcw, Sparkles, Target, Trophy } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { Progress } from "@/components/ui/progress";
+import { Textarea } from "@/components/ui/textarea";
+import { LESSONS } from "./lessons";
+
+const STORAGE_KEY = "juju-tong-progress-v1";
+
+export default function Home() {
+  const [selectedDay, setSelectedDay] = useState(0);
+  const [arranged, setArranged] = useState<number[]>([]);
+  const [orderStatus, setOrderStatus] = useState<"idle" | "correct" | "wrong">("idle");
+  const [chosenVariation, setChosenVariation] = useState(0);
+  const [ownSentence, setOwnSentence] = useState("");
+  const [completed, setCompleted] = useState<number[]>([]);
+  const [saved, setSaved] = useState(false);
+  const lesson = LESSONS[selectedDay];
+
+  useEffect(() => {
+    const stored = window.localStorage.getItem(STORAGE_KEY);
+    if (!stored) return;
+    let data: { completed?: number[]; drafts?: Record<string, string> };
+    try {
+      data = JSON.parse(stored) as { completed?: number[]; drafts?: Record<string, string> };
+    } catch {
+      window.localStorage.removeItem(STORAGE_KEY);
+      return;
+    }
+    const hydration = window.setTimeout(() => {
+      setCompleted(data.completed ?? []);
+      setOwnSentence(data.drafts?.["0"] ?? "");
+    }, 0);
+    return () => window.clearTimeout(hydration);
+  }, []);
+
+  const readData = () => {
+    try { return JSON.parse(window.localStorage.getItem(STORAGE_KEY) ?? "{}") as { completed?: number[]; drafts?: Record<string, string> }; }
+    catch { return {}; }
+  };
+
+  const changeDay = (day: number) => {
+    const data = readData();
+    const drafts = data.drafts ?? {};
+    drafts[String(selectedDay)] = ownSentence;
+    window.localStorage.setItem(STORAGE_KEY, JSON.stringify({ completed, drafts }));
+    setSelectedDay(day);
+    setOwnSentence(drafts[String(day)] ?? "");
+    setArranged([]); setOrderStatus("idle"); setChosenVariation(0); setSaved(false);
+  };
+
+  const available = lesson.mixed.filter((index) => !arranged.includes(index));
+  const progress = Math.round((completed.length / LESSONS.length) * 100);
+  const hasEnoughCharacters = ownSentence.replace(/[\s，。！？：“”]/g, "").length >= 8;
+  const hasPunctuation = /[，。！？]/.test(ownSentence);
+  const usesPattern = lesson.patternKeys.every((key) => ownSentence.includes(key));
+  const structureColors = useMemo(() => ["chunk-yellow", "chunk-blue", "chunk-coral", "chunk-green"], []);
+
+  const speak = () => {
+    if (!("speechSynthesis" in window)) return;
+    window.speechSynthesis.cancel();
+    const voice = new SpeechSynthesisUtterance(lesson.sentence);
+    voice.lang = "zh-CN"; voice.rate = 0.78;
+    window.speechSynthesis.speak(voice);
+  };
+
+  const checkOrder = () => {
+    const correct = arranged.length === lesson.chunks.length && arranged.every((value, index) => value === index);
+    setOrderStatus(correct ? "correct" : "wrong");
+  };
+
+  const saveLesson = () => {
+    const nextCompleted = completed.includes(selectedDay) ? completed : [...completed, selectedDay];
+    const data = readData();
+    const drafts = data.drafts ?? {};
+    drafts[String(selectedDay)] = ownSentence;
+    setCompleted(nextCompleted);
+    window.localStorage.setItem(STORAGE_KEY, JSON.stringify({ completed: nextCompleted, drafts }));
+    setSaved(true);
+  };
+
+  return (
+    <main className="min-h-screen pb-20">
+      <header className="app-header">
+        <div className="mx-auto flex max-w-6xl items-center justify-between px-4 py-4 sm:px-6">
+          <div className="flex items-center gap-3">
+            <div className="logo-tile" aria-hidden="true">句</div>
+            <div><p className="text-xl font-black text-white">句句通</p><p className="text-sm text-blue-100">每日一句，写得通顺</p></div>
+          </div>
+          <div className="hidden items-center gap-2 rounded-full bg-white/10 px-4 py-2 text-sm font-semibold text-white sm:flex">
+            <Trophy className="h-4 w-4 text-yellow-300" />本周 {completed.length} / 7 天
+          </div>
+        </div>
+      </header>
+
+      <div className="mx-auto max-w-6xl px-4 pt-6 sm:px-6 sm:pt-8">
+        <section className="mission-card mb-6 overflow-hidden rounded-[2rem] p-5 sm:p-8">
+          <div className="relative z-10 grid gap-6 lg:grid-cols-[1fr_310px] lg:items-center">
+            <div>
+              <div className="mb-3 flex flex-wrap items-center gap-2"><span className="rounded-full bg-yellow-300 px-3 py-1 text-sm font-black text-slate-900">今日任务</span><span className="text-sm font-bold text-blue-100">第 {selectedDay + 1} 课 · 约 10 分钟</span></div>
+              <h1 className="text-3xl font-black tracking-tight text-white sm:text-5xl">{lesson.title}</h1>
+              <p className="mt-3 text-base font-medium text-blue-100 sm:text-lg">学习重点：{lesson.focus}</p>
+            </div>
+            <div className="rounded-2xl border border-white/20 bg-white/10 p-4">
+              <div className="mb-2 flex justify-between text-sm font-bold text-white"><span>本周进度</span><span>{progress}%</span></div>
+              <Progress value={progress} className="h-3 bg-white/15 [&>div]:bg-yellow-300" />
+              <p className="mt-3 text-sm leading-6 text-blue-100">完成后，句子会自动收藏在这台设备上。</p>
+            </div>
+          </div>
+        </section>
+
+        <nav aria-label="选择练习日" className="week-strip mb-6">
+          {LESSONS.map((item, index) => (
+            <button key={item.day} type="button" onClick={() => changeDay(index)} className={`day-button ${selectedDay === index ? "day-button-active" : ""}`} aria-current={selectedDay === index ? "page" : undefined}>
+              <span className="text-xs font-bold opacity-60">星期</span><span className="text-lg font-black">{item.day}</span>
+              {completed.includes(index) && <Check className="day-check" aria-label="已完成" />}
+            </button>
+          ))}
+        </nav>
+
+        <div className="grid gap-6 lg:grid-cols-[minmax(0,1fr)_330px] lg:items-start">
+          <div className="space-y-6">
+            <Panel step="1" title="学一句" subtitle="先听，再大声读三遍。">
+              <div className="sentence-paper"><p className="model-sentence">{lesson.sentence}</p><Button onClick={speak} className="listen-button"><Headphones className="h-5 w-5" /> 听一听</Button></div>
+            </Panel>
+
+            <Panel step="2" title="拆一句" subtitle="看看每一部分负责什么。">
+              <div className="flex flex-wrap gap-3">
+                {lesson.chunks.map((chunk, index) => <div key={chunk} className={`structure-chunk ${structureColors[index]}`}><span>{lesson.labels[index]}</span><strong>{chunk}</strong></div>)}
+              </div>
+              <div className="pattern-note"><Lightbulb className="h-5 w-5 shrink-0" /><span><strong>句型骨架：</strong>{lesson.pattern}</span></div>
+            </Panel>
+
+            <Panel step="3" title="排一句" subtitle="按正确顺序点击句子部分。">
+              <div className={`answer-track ${orderStatus === "correct" ? "answer-correct" : ""}`}>
+                {arranged.length === 0 ? <span className="font-medium text-slate-400">句子会在这里出现……</span> : arranged.map((index, position) => <button key={`${index}-${position}`} type="button" onClick={() => { setArranged(arranged.filter((_, i) => i !== position)); setOrderStatus("idle"); }} className="answer-chip">{lesson.chunks[index]}</button>)}
+              </div>
+              <div className="mt-4 flex flex-wrap gap-2">{available.map((index) => <button key={index} type="button" onClick={() => { setArranged([...arranged, index]); setOrderStatus("idle"); }} className="word-chip">{lesson.chunks[index]}</button>)}</div>
+              <div className="mt-5 flex flex-wrap items-center gap-3">
+                <Button onClick={checkOrder} disabled={arranged.length !== lesson.chunks.length} className="primary-button">检查顺序 <ChevronRight className="h-4 w-4" /></Button>
+                <Button variant="ghost" onClick={() => { setArranged([]); setOrderStatus("idle"); }}><RotateCcw className="h-4 w-4" /> 重来</Button>
+                {orderStatus === "correct" && <p className="feedback-correct"><Check className="h-4 w-4" /> 顺序正确！</p>}
+                {orderStatus === "wrong" && <p className="feedback-try">再想想：先找时间或人物。</p>}
+              </div>
+            </Panel>
+
+            <Panel step="4" title="变一句" subtitle="同一个句型，可以换不同内容。">
+              <div className="grid gap-3 sm:grid-cols-3">{lesson.variations.map((variation, index) => <button type="button" key={variation} onClick={() => setChosenVariation(index)} className={`variation-card ${chosenVariation === index ? "variation-card-active" : ""}`}><span>变化 {index + 1}</span><p>{variation}</p></button>)}</div>
+            </Panel>
+
+            <Panel step="5" title="写一句" subtitle="现在轮到你自己运用。">
+              <div className="writing-prompt"><Target className="h-5 w-5 shrink-0" /><p>{lesson.prompt}</p></div>
+              <label htmlFor="own-sentence" className="sr-only">写下自己的句子</label>
+              <Textarea id="own-sentence" value={ownSentence} onChange={(event) => { setOwnSentence(event.target.value); setSaved(false); }} placeholder="在这里写下你的句子……" className="writing-area" />
+              <div className="mt-4 grid gap-2 sm:grid-cols-3"><CheckItem done={hasEnoughCharacters} label="意思完整" /><CheckItem done={hasPunctuation} label="使用标点" /><CheckItem done={usesPattern} label="用到今天的句型" optional /></div>
+              <div className="mt-5 flex flex-wrap items-center gap-3">
+                <Button onClick={saveLesson} disabled={!hasEnoughCharacters || !hasPunctuation} className="complete-button"><Sparkles className="h-5 w-5" /> 完成今天练习</Button>
+                {saved && <p className="feedback-correct"><Check className="h-4 w-4" /> 已保存到这台设备</p>}
+              </div>
+            </Panel>
+          </div>
+
+          <aside className="space-y-5 lg:sticky lg:top-5">
+            <section className="side-card">
+              <div className="flex items-center gap-3"><div className="side-icon bg-blue-100 text-blue-700"><BookOpen className="h-5 w-5" /></div><div><p className="text-sm font-bold text-slate-500">今天记住</p><h2 className="text-lg font-black text-slate-900">通顺检查法</h2></div></div>
+              <ol className="mt-5 space-y-4">{["谁在做这件事？", "时间和地点清楚吗？", "动作顺序合理吗？", "慢慢读一遍顺口吗？"].map((item, index) => <li key={item} className="flex gap-3 font-medium leading-6 text-slate-700"><span className="check-index">{index + 1}</span>{item}</li>)}</ol>
+            </section>
+            <section className="side-card border-2 border-dashed border-yellow-300 bg-yellow-50">
+              <div className="flex items-start gap-3"><div className="side-icon bg-yellow-300 text-slate-900"><Sparkles className="h-5 w-5" /></div><div><h2 className="text-lg font-black text-slate-900">给家长的小提示</h2><p className="mt-2 text-sm font-medium leading-6 text-slate-600">先请孩子说出句型骨架，再改一个地方。不要一次纠正所有错误。</p></div></div>
+            </section>
+          </aside>
+        </div>
+      </div>
+    </main>
+  );
+}
+
+function Panel({ step, title, subtitle, children }: { step: string; title: string; subtitle: string; children: React.ReactNode }) {
+  return <section className="lesson-panel"><div className="step-heading"><span className="step-number">{step}</span><div><h2>{title}</h2><p>{subtitle}</p></div></div>{children}</section>;
+}
+
+function CheckItem({ done, label, optional = false }: { done: boolean; label: string; optional?: boolean }) {
+  return <div className={`self-check ${done ? "self-check-done" : ""}`}><span className="self-check-icon">{done && <Check className="h-4 w-4" />}</span><span>{label}{optional && <small> 加分项</small>}</span></div>;
+}

@@ -1,0 +1,5 @@
+<svg width="64" height="64" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg">
+  <rect width="64" height="64" rx="18" fill="#FFD84D"/>
+  <rect x="5" y="5" width="54" height="54" rx="14" fill="none" stroke="#0E2A55" stroke-width="5"/>
+  <text x="32" y="44" text-anchor="middle" font-family="Arial, sans-serif" font-size="38" font-weight="900" fill="#0E2A55">句</text>
+</svg>
