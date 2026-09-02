@@ -2,11 +2,14 @@ export type Lesson = {
   day: string;
   title: string;
   focus: string;
+  focusEn: string;
   sentence: string;
   chunks: string[];
   mixed: number[];
   labels: string[];
+  labelsEn: string[];
   pattern: string;
+  patternEn: string;
   patternKeys: string[];
   prompt: string;
   variations: string[];
@@ -14,58 +17,65 @@ export type Lesson = {
 
 export const LESSONS: Lesson[] = [
   {
-    day: "一", title: "时间放前面", focus: "时间＋人物＋事情",
+    day: "一", title: "时间放前面", focus: "时间＋人物＋事情", focusEn: "When + Who + What happened",
     sentence: "放学后，我和同学一起到图书馆温习功课。",
     chunks: ["放学后，", "我和同学", "一起到图书馆", "温习功课。"], mixed: [2, 0, 3, 1],
-    labels: ["时间", "人物", "地点", "动作"], pattern: "什么时候＋谁＋在哪里＋做什么", patternKeys: ["，", "。"],
+    labels: ["时间", "人物", "地点", "动作"], labelsEn: ["When", "Who", "Where", "Action"],
+    pattern: "什么时候＋谁＋在哪里＋做什么", patternEn: "When + Who + Where + What action", patternKeys: ["，", "。"],
     prompt: "写一句话，说说你星期六早上去了哪里、做了什么。",
     variations: ["星期六早上，我和爸爸到公园里骑脚踏车。", "午休时，我和好友在食堂里一起吃午餐。", "晚饭后，我在房间里认真地复习生字。"],
   },
   {
-    day: "二", title: "动作排好队", focus: "动作按照发生顺序写",
+    day: "二", title: "动作排好队", focus: "动作按照发生顺序写", focusEn: "Put actions in the order they happened",
     sentence: "我连忙跑过去，弯下腰，把散落在地上的书一本一本捡起来。",
     chunks: ["我连忙跑过去，", "弯下腰，", "把散落在地上的书", "一本一本捡起来。"], mixed: [3, 1, 0, 2],
-    labels: ["走近", "弯腰", "对象", "完成"], pattern: "先走近＋再弯腰＋最后完成事情", patternKeys: ["，", "。"],
+    labels: ["走近", "弯腰", "对象", "完成"], labelsEn: ["Go closer", "Bend down", "Object", "Finish"],
+    pattern: "先走近＋再弯腰＋最后完成事情", patternEn: "First approach + Then bend down + Finally complete the action", patternKeys: ["，", "。"],
     prompt: "看到地上有一个钱包，你会怎样做？用三个连续动作来写。",
     variations: ["我快步走上前，伸出双手，小心翼翼地扶起老奶奶。", "他蹲下身子，拾起水瓶，顺手把它放进回收箱。", "妹妹打开书包，拿出作业本，认真地检查答案。"],
   },
   {
-    day: "三", title: "不只写‘很紧张’", focus: "用反应表现心情",
+    day: "三", title: "不只写‘很紧张’", focus: "用反应表现心情", focusEn: "Show feelings through reactions",
     sentence: "看到眼前的一幕，我顿时愣住了，一时不知该怎么办。",
     chunks: ["看到眼前的一幕，", "我顿时愣住了，", "一时", "不知该怎么办。"], mixed: [1, 3, 0, 2],
-    labels: ["原因", "反应", "时间", "想法"], pattern: "发生什么＋身体反应＋心里的想法", patternKeys: ["，", "。"],
+    labels: ["原因", "反应", "时间", "想法"], labelsEn: ["Cause", "Reaction", "Timing", "Thought"],
+    pattern: "发生什么＋身体反应＋心里的想法", patternEn: "What happened + Physical reaction + Inner thought", patternKeys: ["，", "。"],
     prompt: "你发现重要的东西不见了。不要只写‘我很着急’，写出你的反应。",
     variations: ["听到这个消息，我的心猛地一沉，急得手心直冒汗。", "轮到我上台时，我深吸一口气，努力让自己镇定下来。", "看到满分的考卷，我眼前一亮，脸上露出了灿烂的笑容。"],
   },
   {
-    day: "四", title: "对话有动作", focus: "说话前加动作和语气",
+    day: "四", title: "对话有动作", focus: "说话前加动作和语气", focusEn: "Add an action and tone before dialogue",
     sentence: "我走上前，轻声问道：“你需要帮忙吗？”",
     chunks: ["我走上前，", "轻声问道：", "“你需要", "帮忙吗？”"], mixed: [2, 0, 3, 1],
-    labels: ["动作", "语气", "内容", "内容"], pattern: "人物动作＋说话语气＋说话内容", patternKeys: ["：“", "？”"],
+    labels: ["动作", "语气", "内容", "内容"], labelsEn: ["Action", "Tone", "Words", "Words"],
+    pattern: "人物动作＋说话语气＋说话内容", patternEn: "Character's action + Tone + Spoken words", patternKeys: ["：“", "？”"],
     prompt: "同学看起来不开心。写一句你上前关心他的对话。",
     variations: ["老师皱了皱眉，严肃地说：“走廊上不可以奔跑。”", "妈妈摸摸我的头，温柔地说：“别担心，我们一起想办法。”", "我指着前方，兴奋地喊道：“快看，我们终于到了！”"],
   },
   {
-    day: "五", title: "关联词要成双", focus: "虽然……但是……",
+    day: "五", title: "关联词要成双", focus: "虽然……但是……", focusEn: "Although ... but ...",
     sentence: "虽然雨越下越大，但是大家仍然耐心地等候。",
     chunks: ["虽然", "雨越下越大，", "但是大家", "仍然耐心地等候。"], mixed: [3, 1, 0, 2],
-    labels: ["转折词", "困难", "转折词", "结果"], pattern: "虽然＋遇到的困难＋但是＋仍然做什么", patternKeys: ["虽然", "但是"],
+    labels: ["转折词", "困难", "转折词", "结果"], labelsEn: ["Connector", "Difficulty", "Connector", "Result"],
+    pattern: "虽然＋遇到的困难＋但是＋仍然做什么", patternEn: "Although + Difficulty + But + What continued", patternKeys: ["虽然", "但是"],
     prompt: "用‘虽然……但是……’写一句坚持完成事情的句子。",
     variations: ["虽然题目很有挑战性，但是我没有轻易放弃。", "虽然弟弟做错了事，但是他愿意诚恳地道歉。", "虽然天气十分炎热，但是同学们仍然认真地练习。"],
   },
   {
-    day: "六", title: "把字句更清楚", focus: "谁＋把＋什么＋怎么样",
+    day: "六", title: "把字句更清楚", focus: "谁＋把＋什么＋怎么样", focusEn: "Who + 把 + Object + What was done",
     sentence: "我把地上的塑料瓶捡起来，放进蓝色的回收箱里。",
     chunks: ["我", "把地上的塑料瓶", "捡起来，", "放进蓝色的回收箱里。"], mixed: [1, 3, 0, 2],
-    labels: ["人物", "对象", "动作一", "动作二"], pattern: "谁＋把＋什么东西＋做了什么", patternKeys: ["把", "。"],
+    labels: ["人物", "对象", "动作一", "动作二"], labelsEn: ["Who", "Object", "Action 1", "Action 2"],
+    pattern: "谁＋把＋什么东西＋做了什么", patternEn: "Who + 把 + Object + What was done", patternKeys: ["把", "。"],
     prompt: "写一句使用‘把’的句子，说明你怎样整理书桌。",
     variations: ["我把散乱的文具收好，整齐地放进抽屉里。", "姐姐把刚洗好的衣服晾在阳台上。", "值日生把白板擦得干干净净。"],
   },
   {
-    day: "日", title: "本周小挑战", focus: "把三种句型连成小段落",
+    day: "日", title: "本周小挑战", focus: "把三种句型连成小段落", focusEn: "Join three sentence patterns into a short paragraph",
     sentence: "下课后，我看见同学跌倒，便连忙跑过去扶他，并轻声问他有没有受伤。",
     chunks: ["下课后，", "我看见同学跌倒，", "便连忙跑过去扶他，", "并轻声问他有没有受伤。"], mixed: [2, 0, 3, 1],
-    labels: ["时间", "发现", "行动", "关心"], pattern: "时间＋发现问题＋采取行动＋关心对方", patternKeys: ["，", "。"],
+    labels: ["时间", "发现", "行动", "关心"], labelsEn: ["When", "Notice", "Action", "Care"],
+    pattern: "时间＋发现问题＋采取行动＋关心对方", patternEn: "When + Notice a problem + Take action + Show care", patternKeys: ["，", "。"],
     prompt: "用三至四句话写一个小段落：你看见别人需要帮助，并主动上前帮忙。",
     variations: ["我先说明发生了什么，再写自己怎样帮助对方，最后写事情的结果。", "每句话只表达一个主要意思，读起来会更清楚。", "写完后慢慢读一遍，就能发现遗漏或重复的词语。"],
   },

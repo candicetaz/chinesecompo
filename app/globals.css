@@ -52,12 +52,14 @@ button, textarea { font: inherit; }
 .listen-button:hover,.primary-button:hover { background:#1249b7; }
 
 .structure-chunk { min-width:125px; flex:1; border-radius:1rem; padding:.9rem; }
-.structure-chunk span { display:block; margin-bottom:.35rem; font-size:.75rem; font-weight:900; opacity:.62; }
+.structure-chunk span { display:block; margin-bottom:.35rem; font-size:.75rem; font-weight:900; opacity:.72; }
+.structure-chunk span em { margin-left:.28rem; font-style:normal; font-weight:750; opacity:.78; }
 .structure-chunk strong { font-size:1.03rem; line-height:1.6; }
 .chunk-yellow { background:#fff1a8; color:#4b3c00; } .chunk-blue { background:#ddebff; color:#173b82; }
 .chunk-coral { background:#ffe0db; color:#85291f; } .chunk-green { background:#dff7eb; color:#145b40; }
 .pattern-note,.writing-prompt { display:flex; gap:.65rem; align-items:flex-start; margin-top:1rem; border-radius:.85rem; padding:.85rem 1rem; font-size:.95rem; font-weight:600; line-height:1.55; }
 .pattern-note { background:#f2edff; color:#53368a; } .writing-prompt { background:#eaf1ff; color:#173b82; }
+.pattern-note small { display:block; margin-top:.28rem; color:#7659a4; font-size:.82rem; font-weight:700; }
 
 .answer-track { display:flex; min-height:5rem; flex-wrap:wrap; align-items:center; gap:.45rem; border:2px dashed #b9c6d8; border-radius:1rem; background:#f8fafc; padding:1rem; }
 .answer-correct { border-color:#19a974; background:#edfbf5; }

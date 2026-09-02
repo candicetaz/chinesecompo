@@ -101,7 +101,10 @@ export default function Home() {
             <div>
               <div className="mb-3 flex flex-wrap items-center gap-2"><span className="rounded-full bg-yellow-300 px-3 py-1 text-sm font-black text-slate-900">今日任务</span><span className="text-sm font-bold text-blue-100">第 {selectedDay + 1} 课 · 约 10 分钟</span></div>
               <h1 className="text-3xl font-black tracking-tight text-white sm:text-5xl">{lesson.title}</h1>
-              <p className="mt-3 text-base font-medium text-blue-100 sm:text-lg">学习重点：{lesson.focus}</p>
+              <div className="mt-3">
+                <p className="text-base font-bold text-blue-50 sm:text-lg">学习重点：{lesson.focus}</p>
+                <p className="mt-1 text-sm font-semibold text-blue-100 sm:text-base">{lesson.focusEn}</p>
+              </div>
             </div>
             <div className="rounded-2xl border border-white/20 bg-white/10 p-4">
               <div className="mb-2 flex justify-between text-sm font-bold text-white"><span>本周进度</span><span>{progress}%</span></div>
@@ -128,9 +131,20 @@ export default function Home() {
 
             <Panel step="2" title="拆一句" subtitle="看看每一部分负责什么。">
               <div className="flex flex-wrap gap-3">
-                {lesson.chunks.map((chunk, index) => <div key={chunk} className={`structure-chunk ${structureColors[index]}`}><span>{lesson.labels[index]}</span><strong>{chunk}</strong></div>)}
+                {lesson.chunks.map((chunk, index) => (
+                  <div key={chunk} className={`structure-chunk ${structureColors[index]}`}>
+                    <span>{lesson.labels[index]} <em>{lesson.labelsEn[index]}</em></span>
+                    <strong>{chunk}</strong>
+                  </div>
+                ))}
               </div>
-              <div className="pattern-note"><Lightbulb className="h-5 w-5 shrink-0" /><span><strong>句型骨架：</strong>{lesson.pattern}</span></div>
+              <div className="pattern-note">
+                <Lightbulb className="h-5 w-5 shrink-0" />
+                <span>
+                  <strong>句型骨架：</strong>{lesson.pattern}
+                  <small>{lesson.patternEn}</small>
+                </span>
+              </div>
             </Panel>
 
             <Panel step="3" title="排一句" subtitle="按正确顺序点击句子部分。">
