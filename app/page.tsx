@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useMemo, useState } from "react";
-import { BookOpen, Check, ChevronRight, Headphones, Lightbulb, Menu, RotateCcw, Sparkles, Target, Trophy, X } from "lucide-react";
+import { BookOpen, Check, ChevronRight, Headphones, Lightbulb, RotateCcw, Sparkles, Target, Trophy } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Progress } from "@/components/ui/progress";
 import { Textarea } from "@/components/ui/textarea";
@@ -19,7 +19,6 @@ export default function Home() {
   const [completed, setCompleted] = useState<number[]>([]);
   const [saved, setSaved] = useState(false);
   const [openReference, setOpenReference] = useState<"learning-path" | "differences" | "notebook" | null>(null);
-  const [navOpen, setNavOpen] = useState(false);
   const lesson = LESSONS[selectedDay];
 
   useEffect(() => {
@@ -94,11 +93,6 @@ export default function Home() {
     setSaved(true);
   };
 
-  const toggleReference = (reference: "learning-path" | "differences" | "notebook") => {
-    setOpenReference(openReference === reference ? null : reference);
-    setNavOpen(false);
-  };
-
   return (
     <main className="min-h-screen pb-20">
       <header className="app-header">
@@ -141,33 +135,18 @@ export default function Home() {
           ))}
         </nav>
 
-        <button type="button" className="mobile-tools-button" onClick={() => setNavOpen(true)} aria-expanded={navOpen} aria-controls="learning-tools-sidebar">
-          <Menu className="h-5 w-5" /> 学习工具 <span>Learning Tools</span>
-        </button>
-
-        {navOpen && <button type="button" className="sidebar-backdrop" aria-label="关闭学习工具" onClick={() => setNavOpen(false)} />}
-
-        <div className="app-workspace">
-          <aside id="learning-tools-sidebar" className={`tool-sidebar ${navOpen ? "tool-sidebar-open" : ""}`}>
-            <div className="tool-sidebar-heading">
-              <div><strong>学习工具</strong><span>Learning Tools</span></div>
-              <button type="button" className="sidebar-close" onClick={() => setNavOpen(false)} aria-label="关闭学习工具"><X className="h-5 w-5" /></button>
-            </div>
-            <nav className="reference-nav" aria-label="学习工具">
-              <a href="#daily-practice" onClick={() => setNavOpen(false)}>每日练习 <span>Daily Practice</span></a>
-              <button type="button" onClick={() => toggleReference("learning-path")} aria-expanded={openReference === "learning-path"} aria-controls="learning-path">
-                学习路线 <span>Learning Path</span>
-              </button>
-              <button type="button" onClick={() => toggleReference("differences")} aria-expanded={openReference === "differences"} aria-controls="differences">
-                中英差异 <span>Chinese vs English</span>
-              </button>
-              <button type="button" onClick={() => toggleReference("notebook")} aria-expanded={openReference === "notebook"} aria-controls="notebook">
-                我的句型本 <span>Pattern Notebook</span>
-              </button>
-            </nav>
-          </aside>
-
-          <div className="workspace-main">
+        <nav className="reference-nav mb-6" aria-label="学习工具">
+          <a href="#daily-practice">每日练习 <span>Daily Practice</span></a>
+          <button type="button" onClick={() => setOpenReference(openReference === "learning-path" ? null : "learning-path")} aria-expanded={openReference === "learning-path"} aria-controls="learning-path">
+            学习路线 <span>Learning Path</span>
+          </button>
+          <button type="button" onClick={() => setOpenReference(openReference === "differences" ? null : "differences")} aria-expanded={openReference === "differences"} aria-controls="differences">
+            中英差异 <span>Chinese vs English</span>
+          </button>
+          <button type="button" onClick={() => setOpenReference(openReference === "notebook" ? null : "notebook")} aria-expanded={openReference === "notebook"} aria-controls="notebook">
+            我的句型本 <span>Pattern Notebook</span>
+          </button>
+        </nav>
 
         {openReference === "learning-path" && (
         <section id="learning-path" className="reference-section mb-6 scroll-mt-5">
@@ -326,8 +305,6 @@ export default function Home() {
           </div>
         </section>
         )}
-          </div>
-        </div>
       </div>
     </main>
   );
