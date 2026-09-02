@@ -6,6 +6,7 @@ import { Button } from "@/components/ui/button";
 import { Progress } from "@/components/ui/progress";
 import { Textarea } from "@/components/ui/textarea";
 import { LESSONS } from "./lessons";
+import { LANGUAGE_DIFFERENCES, LEARNING_LEVELS, NOTEBOOK_CATEGORIES } from "./reference-data";
 
 const STORAGE_KEY = "juju-tong-progress-v1";
 
@@ -123,6 +124,62 @@ export default function Home() {
           ))}
         </nav>
 
+        <nav className="reference-nav mb-6" aria-label="学习工具">
+          <a href="#learning-path">学习路线 <span>Learning Path</span></a>
+          <a href="#differences">中英差异 <span>Chinese vs English</span></a>
+          <a href="#notebook">我的句型本 <span>Pattern Notebook</span></a>
+        </nav>
+
+        <section id="learning-path" className="reference-section mb-6 scroll-mt-5">
+          <div className="reference-heading">
+            <div>
+              <p className="reference-kicker">循序渐进 · Step by step</p>
+              <h2>五个学习阶段 <span>5 Learning Levels</span></h2>
+              <p>先把句子写通顺，再逐步学习段落和完整作文。</p>
+              <p className="heading-en">Build clear sentences first, then progress towards paragraphs and full compositions.</p>
+            </div>
+          </div>
+          <div className="level-grid">
+            {LEARNING_LEVELS.map((item) => (
+              <article key={item.level} className={`level-card ${item.level === 1 ? "level-card-active" : ""}`}>
+                <div className="level-topline">
+                  <span className="level-number">{item.level}</span>
+                  <span className="level-status">{item.level === 1 ? "现在学习 · Current" : "接下来 · Next"}</span>
+                </div>
+                <h3>{item.title}</h3>
+                <h4>{item.titleEn}</h4>
+                <p>{item.description}</p>
+                <p className="card-en">{item.descriptionEn}</p>
+              </article>
+            ))}
+          </div>
+        </section>
+
+        <section id="differences" className="reference-section difference-section mb-6 scroll-mt-5">
+          <div className="reference-heading">
+            <div>
+              <p className="reference-kicker">写之前先懂 · Learn this first</p>
+              <h2>中文和英文的句子有什么不同？ <span>How Chinese Sentence Order Differs from English</span></h2>
+              <p>不要把英文字句逐字翻译成中文。先观察中文习惯怎样安排词语。</p>
+              <p className="heading-en">Do not translate English word for word. Notice how natural Chinese arranges each part.</p>
+            </div>
+          </div>
+          <div className="difference-grid">
+            {LANGUAGE_DIFFERENCES.map((item) => (
+              <article key={item.number} className="difference-card">
+                <div className="difference-title">
+                  <span>{item.number}</span>
+                  <div><h3>{item.title}</h3><h4>{item.titleEn}</h4></div>
+                </div>
+                <div className="example-row example-english"><b>English</b><p>{item.english}</p></div>
+                <div className="example-row example-chinese"><b>中文</b><p>{item.chinese}</p></div>
+                <p className="difference-explanation">{item.explanation}</p>
+                <p className="card-en">{item.explanationEn}</p>
+              </article>
+            ))}
+          </div>
+        </section>
+
         <div className="grid gap-6 lg:grid-cols-[minmax(0,1fr)_330px] lg:items-start">
           <div className="space-y-6">
             <Panel step="1" title="学一句" subtitle="先听，再大声读三遍。">
@@ -186,6 +243,34 @@ export default function Home() {
             </section>
           </aside>
         </div>
+
+        <section id="notebook" className="reference-section notebook-section mt-8 scroll-mt-5">
+          <div className="reference-heading">
+            <div>
+              <p className="reference-kicker">按用途收藏 · Organised by purpose</p>
+              <h2>我的句型本 <span>My Sentence Pattern Notebook</span></h2>
+              <p>不要只按作文题目背句子。把句型分成七种用途，写不同题目时都能使用。</p>
+              <p className="heading-en">Do not memorise sentences only by topic. These seven purposes can be reused across many compositions.</p>
+            </div>
+          </div>
+          <div className="notebook-grid">
+            {NOTEBOOK_CATEGORIES.map((item) => (
+              <details key={item.number} className="notebook-card" open={item.number === 1}>
+                <summary>
+                  <span className="notebook-number">{item.number}</span>
+                  <span><strong>{item.title}</strong><small>{item.titleEn}</small></span>
+                  <span className="notebook-plus" aria-hidden="true">＋</span>
+                </summary>
+                <div className="notebook-content">
+                  <div className="notebook-pattern"><b>句型 Pattern</b><p>{item.pattern}</p><small>{item.patternEn}</small></div>
+                  <div className="notebook-example"><b>例句 Example</b><p>{item.example}</p></div>
+                  <p>{item.explanation}</p>
+                  <p className="card-en">{item.explanationEn}</p>
+                </div>
+              </details>
+            ))}
+          </div>
+        </section>
       </div>
     </main>
   );
