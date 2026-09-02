@@ -50,6 +50,9 @@ export default function Home() {
     setSelectedDay(day);
     setOwnSentence(drafts[String(day)] ?? "");
     setArranged([]); setOrderStatus("idle"); setChosenVariation(0); setSaved(false);
+    window.requestAnimationFrame(() => {
+      document.getElementById("daily-practice")?.scrollIntoView({ behavior: "smooth", block: "start" });
+    });
   };
 
   const available = lesson.mixed.filter((index) => !arranged.includes(index));
@@ -125,6 +128,7 @@ export default function Home() {
         </nav>
 
         <nav className="reference-nav mb-6" aria-label="学习工具">
+          <a href="#daily-practice">每日练习 <span>Daily Practice</span></a>
           <a href="#learning-path">学习路线 <span>Learning Path</span></a>
           <a href="#differences">中英差异 <span>Chinese vs English</span></a>
           <a href="#notebook">我的句型本 <span>Pattern Notebook</span></a>
@@ -180,7 +184,16 @@ export default function Home() {
           </div>
         </section>
 
-        <div className="grid gap-6 lg:grid-cols-[minmax(0,1fr)_330px] lg:items-start">
+        <section id="daily-practice" className="daily-practice-section scroll-mt-5">
+          <div className="daily-practice-heading">
+            <div>
+              <p>第 {selectedDay + 1} 天 · Day {selectedDay + 1}</p>
+              <h2>{lesson.title}</h2>
+              <span>{lesson.focusEn}</span>
+            </div>
+            <strong>今天完成 5 个步骤<br /><small>Complete 5 steps today</small></strong>
+          </div>
+          <div className="grid gap-6 lg:grid-cols-[minmax(0,1fr)_330px] lg:items-start">
           <div className="space-y-6">
             <Panel step="1" title="学一句" subtitle="先听，再大声读三遍。">
               <div className="sentence-paper"><p className="model-sentence">{lesson.sentence}</p><Button onClick={speak} className="listen-button"><Headphones className="h-5 w-5" /> 听一听</Button></div>
@@ -242,7 +255,8 @@ export default function Home() {
               <div className="flex items-start gap-3"><div className="side-icon bg-yellow-300 text-slate-900"><Sparkles className="h-5 w-5" /></div><div><h2 className="text-lg font-black text-slate-900">给家长的小提示</h2><p className="mt-2 text-sm font-medium leading-6 text-slate-600">先请孩子说出句型骨架，再改一个地方。不要一次纠正所有错误。</p></div></div>
             </section>
           </aside>
-        </div>
+          </div>
+        </section>
 
         <section id="notebook" className="reference-section notebook-section mt-8 scroll-mt-5">
           <div className="reference-heading">

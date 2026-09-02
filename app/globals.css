@@ -88,10 +88,18 @@ button, textarea { font: inherit; }
 .side-icon { display:grid; height:2.6rem; width:2.6rem; flex:0 0 auto; place-items:center; border-radius:.8rem; }
 .check-index { display:grid; height:1.55rem; width:1.55rem; flex:0 0 auto; place-items:center; border-radius:.45rem; background:#eaf1ff; color:#185adb; font-size:.75rem; font-weight:900; }
 
-.reference-nav { display:grid; grid-template-columns:repeat(3,1fr); gap:.75rem; }
+.reference-nav { display:grid; grid-template-columns:repeat(4,1fr); gap:.75rem; }
 .reference-nav a { display:flex; min-height:3.7rem; flex-direction:column; justify-content:center; border:2px solid #dce4ef; border-radius:1rem; background:#fff; padding:.7rem 1rem; color:#173b82; font-size:.94rem; font-weight:900; text-decoration:none; box-shadow:0 3px 0 #dce4ef; }
 .reference-nav a span { margin-top:.12rem; color:#718199; font-size:.75rem; font-weight:700; }
 .reference-nav a:hover { border-color:#185adb; transform:translateY(-1px); box-shadow:0 4px 0 #185adb; }
+
+.daily-practice-section { margin-top:.25rem; }
+.daily-practice-heading { display:flex; align-items:center; justify-content:space-between; gap:1rem; margin-bottom:1rem; border-radius:1.15rem; background:#0e2a55; padding:1rem 1.2rem; color:#fff; box-shadow:0 5px 0 #ffd84d; }
+.daily-practice-heading p { margin:0 0 .18rem; color:#ffd84d; font-size:.75rem; font-weight:950; letter-spacing:.04em; text-transform:uppercase; }
+.daily-practice-heading h2 { margin:0; font-size:1.25rem; font-weight:950; }
+.daily-practice-heading span { display:block; margin-top:.15rem; color:#bcd1f8; font-size:.8rem; font-weight:700; }
+.daily-practice-heading>strong { text-align:right; font-size:.85rem; font-weight:900; line-height:1.35; }
+.daily-practice-heading small { color:#bcd1f8; font-size:.7rem; font-weight:700; }
 
 .reference-section { border:1px solid #dce4ef; border-radius:1.6rem; background:#fff; padding:1.25rem; box-shadow:0 8px 24px rgba(31,55,87,.07); }
 .reference-heading { display:flex; justify-content:space-between; gap:1rem; margin-bottom:1.25rem; }
@@ -151,5 +159,5 @@ button, textarea { font: inherit; }
 .notebook-content>.notebook-example~p:not(.card-en) { margin-top:.8rem; color:#405570; font-size:.87rem; }
 
 @media (min-width:640px) { .lesson-panel,.reference-section { padding:1.75rem; } .sentence-paper { flex-direction:row; align-items:center; justify-content:space-between; } .difference-grid,.notebook-grid { grid-template-columns:repeat(2,minmax(0,1fr)); } }
-@media (max-width:639px) { .week-strip { grid-template-columns:repeat(7,64px); } .mission-card::after { font-size:12rem; top:-5%; } .structure-chunk { min-width:calc(50% - .4rem); } .reference-nav { grid-template-columns:repeat(3,165px); overflow-x:auto; padding-bottom:.3rem; } .level-grid { grid-template-columns:repeat(5,220px); } }
+@media (max-width:639px) { .week-strip { grid-template-columns:repeat(7,64px); } .mission-card::after { font-size:12rem; top:-5%; } .structure-chunk { min-width:calc(50% - .4rem); } .reference-nav { grid-template-columns:repeat(4,165px); overflow-x:auto; padding-bottom:.3rem; } .level-grid { grid-template-columns:repeat(5,220px); } .daily-practice-heading { align-items:flex-start; } .daily-practice-heading>strong { max-width:8rem; font-size:.76rem; } }
 @media (prefers-reduced-motion:reduce) { *,*::before,*::after { scroll-behavior:auto!important; transition:none!important; } }
