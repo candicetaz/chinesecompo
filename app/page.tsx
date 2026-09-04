@@ -1,11 +1,12 @@
 "use client";
 
 import { useEffect, useMemo, useState } from "react";
-import { BookOpen, Check, ChevronRight, Headphones, Lightbulb, RotateCcw, Sparkles, Target, Trophy } from "lucide-react";
+import { BookOpen, Check, ChevronRight, CircleHelp, Headphones, Lightbulb, RotateCcw, Sparkles, Target, Trophy } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Progress } from "@/components/ui/progress";
 import { Textarea } from "@/components/ui/textarea";
 import { LESSONS } from "./lessons";
+import { getDailyQuiz } from "./quiz-data";
 import { LANGUAGE_DIFFERENCES, LEARNING_LEVELS, NOTEBOOK_CATEGORIES } from "./reference-data";
 
 const STORAGE_KEY = "juju-tong-progress-v1";
@@ -19,7 +20,14 @@ export default function Home() {
   const [completed, setCompleted] = useState<number[]>([]);
   const [saved, setSaved] = useState(false);
   const [openReference, setOpenReference] = useState<"learning-path" | "differences" | "notebook" | null>(null);
+  const [quizQuestionIndex, setQuizQuestionIndex] = useState(0);
+  const [quizAnswers, setQuizAnswers] = useState<Record<number, number>>({});
+  const [quizFinished, setQuizFinished] = useState(false);
   const lesson = LESSONS[selectedDay];
+  const dailyQuiz = useMemo(() => getDailyQuiz(selectedDay), [selectedDay]);
+  const quizQuestion = dailyQuiz[quizQuestionIndex];
+  const selectedQuizOption = quizAnswers[quizQuestionIndex];
+  const quizScore = dailyQuiz.reduce((score, question, index) => score + (quizAnswers[index] === question.correctIndex ? 1 : 0), 0);
 
   useEffect(() => {
     const stored = window.localStorage.getItem(STORAGE_KEY);
@@ -58,6 +66,7 @@ export default function Home() {
     setSelectedDay(day);
     setOwnSentence(drafts[String(day)] ?? "");
     setArranged([]); setOrderStatus("idle"); setChosenVariation(0); setSaved(false);
+    setQuizQuestionIndex(0); setQuizAnswers({}); setQuizFinished(false);
     window.requestAnimationFrame(() => {
       document.getElementById("daily-practice")?.scrollIntoView({ behavior: "smooth", block: "start" });
     });
@@ -91,6 +100,12 @@ export default function Home() {
     setCompleted(nextCompleted);
     window.localStorage.setItem(STORAGE_KEY, JSON.stringify({ completed: nextCompleted, drafts }));
     setSaved(true);
+  };
+
+  const restartQuiz = () => {
+    setQuizQuestionIndex(0);
+    setQuizAnswers({});
+    setQuizFinished(false);
   };
 
   return (
@@ -137,6 +152,7 @@ export default function Home() {
 
         <nav className="reference-nav mb-6" aria-label="学习工具">
           <a href="#daily-practice">每日练习 <span>Daily Practice</span></a>
+          <a href="#daily-quiz">每日测验 <span>Daily Quiz</span></a>
           <button type="button" onClick={() => setOpenReference(openReference === "learning-path" ? null : "learning-path")} aria-expanded={openReference === "learning-path"} aria-controls="learning-path">
             学习路线 <span>Learning Path</span>
           </button>
@@ -274,6 +290,79 @@ export default function Home() {
             </section>
           </aside>
           </div>
+        </section>
+
+        <section id="daily-quiz" className="quiz-section mt-8 scroll-mt-5">
+          <div className="quiz-heading">
+            <div>
+              <p>每日测验 · Daily Quiz</p>
+              <h2>第 {selectedDay + 1} 天：{lesson.title}</h2>
+              <span>10 道题 · 选择一个最合适的答案<br />10 questions · Choose the best answer</span>
+            </div>
+            {!quizFinished && <strong>{quizQuestionIndex + 1} / {dailyQuiz.length}</strong>}
+          </div>
+
+          {quizFinished ? (
+            <div className="quiz-result" aria-live="polite">
+              <span className="quiz-result-score">{quizScore} / {dailyQuiz.length}</span>
+              <h3>{quizScore >= 8 ? "掌握得很好！" : quizScore >= 6 ? "不错，再练一次会更稳。" : "继续加油，先重看今天的句型。"}</h3>
+              <p>{quizScore >= 8 ? "Great work—you understand today’s sentence pattern." : quizScore >= 6 ? "Good effort. Try once more to strengthen the pattern." : "Review today’s sentence structure, then try the quiz again."}</p>
+              <Button type="button" onClick={restartQuiz} className="primary-button"><RotateCcw className="h-4 w-4" /> 再试一次 Try again</Button>
+            </div>
+          ) : (
+            <div className="quiz-body">
+              <Progress value={((quizQuestionIndex + 1) / dailyQuiz.length) * 100} className="quiz-progress" />
+              <p className="quiz-number">问题 {quizQuestionIndex + 1} · Question {quizQuestionIndex + 1}</p>
+              <h3>{quizQuestion.question}</h3>
+              <p className="quiz-question-en">{quizQuestion.questionEn}</p>
+
+              <details className="quiz-hint">
+                <summary><CircleHelp className="h-4 w-4" /> 提示 Hint</summary>
+                <p>{quizQuestion.hint}</p>
+              </details>
+
+              <div className="quiz-options" role="group" aria-label={`问题 ${quizQuestionIndex + 1} 的选项`}>
+                {quizQuestion.options.map((option, optionIndex) => {
+                  const answered = selectedQuizOption !== undefined;
+                  const isCorrect = optionIndex === quizQuestion.correctIndex;
+                  const isSelected = optionIndex === selectedQuizOption;
+                  const stateClass = answered && isCorrect ? "quiz-option-correct" : answered && isSelected ? "quiz-option-wrong" : "";
+                  return (
+                    <button
+                      type="button"
+                      key={option.text}
+                      className={`quiz-option ${stateClass}`}
+                      onClick={() => setQuizAnswers((answers) => answers[quizQuestionIndex] === undefined ? { ...answers, [quizQuestionIndex]: optionIndex } : answers)}
+                      disabled={answered}
+                    >
+                      <span>{String.fromCharCode(65 + optionIndex)}</span>
+                      <strong>{option.text}</strong>
+                    </button>
+                  );
+                })}
+              </div>
+
+              {selectedQuizOption !== undefined && (
+                <div className={`quiz-feedback ${selectedQuizOption === quizQuestion.correctIndex ? "quiz-feedback-correct" : "quiz-feedback-wrong"}`} aria-live="polite">
+                  <strong>{selectedQuizOption === quizQuestion.correctIndex ? "答对了！ Correct!" : "再留意句子的结构。 Review the structure."}</strong>
+                  <p>{quizQuestion.options[selectedQuizOption].feedback}</p>
+                  {selectedQuizOption !== quizQuestion.correctIndex && <p><b>正确答案 Correct answer:</b> {quizQuestion.options[quizQuestion.correctIndex].text}</p>}
+                </div>
+              )}
+
+              <div className="quiz-actions">
+                {quizQuestionIndex > 0 && <Button type="button" variant="ghost" onClick={() => setQuizQuestionIndex((index) => index - 1)}>上一题 Previous</Button>}
+                <Button
+                  type="button"
+                  className="primary-button"
+                  disabled={selectedQuizOption === undefined}
+                  onClick={() => quizQuestionIndex === dailyQuiz.length - 1 ? setQuizFinished(true) : setQuizQuestionIndex((index) => index + 1)}
+                >
+                  {quizQuestionIndex === dailyQuiz.length - 1 ? "查看成绩 See score" : "下一题 Next"} <ChevronRight className="h-4 w-4" />
+                </Button>
+              </div>
+            </div>
+          )}
         </section>
 
         {openReference === "notebook" && (
