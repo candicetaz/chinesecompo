@@ -10,6 +10,22 @@ import { getDailyQuiz } from "./quiz-data";
 import { LANGUAGE_DIFFERENCES, LEARNING_LEVELS, NOTEBOOK_CATEGORIES, PSLE_COMPO_COMPONENTS } from "./reference-data";
 
 const STORAGE_KEY = "juju-tong-progress-v1";
+const DAY_TOPICS = [
+  "Time",
+  "Action Order",
+  "Feelings",
+  "Dialogue",
+  "Connectors",
+  "Ba Sentence",
+  "Review",
+  "Target",
+  "Direction",
+  "Verbs",
+  "Results",
+  "Grammar",
+  "Cause & Effect",
+  "Fix It",
+];
 
 export default function Home() {
   const [selectedDay, setSelectedDay] = useState(0);
@@ -215,7 +231,7 @@ export default function Home() {
                   const index = week.start + offset;
                   return (
                     <button key={item.day} type="button" onClick={() => changeDay(index)} className={`day-button ${selectedDay === index ? "day-button-active" : ""}`} aria-label={`第 ${index + 1} 天`} aria-current={selectedDay === index ? "page" : undefined}>
-                      <span className="text-lg font-black">{index + 1}</span><span className="day-skill">{index < 7 ? "基础" : "纠错"}</span>
+                      <span className="text-lg font-black">{index + 1}</span><span className="day-skill">{DAY_TOPICS[index]}</span>
                       {completed.includes(index) && <Check className="day-check" aria-label="已完成" />}
                     </button>
                   );
