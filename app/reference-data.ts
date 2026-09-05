@@ -150,7 +150,30 @@ export const PSLE_COMPO_COMPONENTS = [
   },
 ];
 
-export const NOTEBOOK_CATEGORIES = [
+type NotebookCategory = {
+  number: number;
+  title: string;
+  titleEn: string;
+  pattern: string;
+  patternEn: string;
+  example: string;
+  explanation: string;
+  explanationEn: string;
+  howPractice?: {
+    title: string;
+    titleEn: string;
+    rule: string;
+    ruleEn: string;
+    instruction: string;
+    instructionEn: string;
+    examples: { who: string; how: string; action: string }[];
+    phrases: string[];
+    exception: string;
+    exceptionEn: string;
+  };
+};
+
+export const NOTEBOOK_CATEGORIES: NotebookCategory[] = [
   {
     number: 1,
     title: "时间和地点",
@@ -180,6 +203,35 @@ export const NOTEBOOK_CATEGORIES = [
     example: "我连忙跑过去，弯下腰，把地上的书一本一本捡起来。",
     explanation: "把动作拆开，并按照发生的顺序来写。",
     explanationEn: "Break the action into steps and write them in the order they happen.",
+    howPractice: {
+      title: "动作前加“怎样地”",
+      titleEn: "Add ‘how’ before the action",
+      rule: "谁＋怎么样地＋做什么",
+      ruleEn: "Who + How + Action",
+      instruction: "先找动作，再问：“他怎样做？”把答案放在动作前面。",
+      instructionEn: "Find the action, ask ‘How did the person do it?’, then place the answer before the action.",
+      examples: [
+        { who: "小华", how: "飞快地", action: "跑向终点" },
+        { who: "妹妹", how: "认真地", action: "检查功课" },
+        { who: "老奶奶", how: "慢慢地", action: "走过马路" },
+        { who: "同学们", how: "兴高采烈地", action: "走进礼堂" },
+        { who: "小明", how: "小心翼翼地", action: "捧起小鸟" },
+      ],
+      phrases: [
+        "兴高采烈地走进……",
+        "急急忙忙地跑向……",
+        "小心翼翼地捡起……",
+        "聚精会神地看着……",
+        "津津有味地吃着……",
+        "轻声细语地安慰……",
+        "毫不犹豫地伸出……",
+        "目不转睛地盯着……",
+        "不慌不忙地回答……",
+        "垂头丧气地离开……",
+      ],
+      exception: "注意：连忙、立刻、赶紧、马上通常不加“地”。例如：他连忙跑过去。",
+      exceptionEn: "Note: 连忙, 立刻, 赶紧 and 马上 usually do not take 地. Example: 他连忙跑过去。",
+    },
   },
   {
     number: 4,
