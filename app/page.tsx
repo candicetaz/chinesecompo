@@ -7,7 +7,7 @@ import { Progress } from "@/components/ui/progress";
 import { Textarea } from "@/components/ui/textarea";
 import { LESSONS } from "./lessons";
 import { getDailyQuiz } from "./quiz-data";
-import { LANGUAGE_DIFFERENCES, LEARNING_LEVELS, NOTEBOOK_CATEGORIES } from "./reference-data";
+import { LANGUAGE_DIFFERENCES, LEARNING_LEVELS, NOTEBOOK_CATEGORIES, PSLE_COMPO_COMPONENTS } from "./reference-data";
 
 const STORAGE_KEY = "juju-tong-progress-v1";
 
@@ -19,7 +19,7 @@ export default function Home() {
   const [ownSentence, setOwnSentence] = useState("");
   const [completed, setCompleted] = useState<number[]>([]);
   const [saved, setSaved] = useState(false);
-  const [openReference, setOpenReference] = useState<"learning-path" | "differences" | "notebook" | null>(null);
+  const [openReference, setOpenReference] = useState<"learning-path" | "differences" | "notebook" | "compo-components" | null>(null);
   const [quizQuestionIndex, setQuizQuestionIndex] = useState(0);
   const [quizAnswers, setQuizAnswers] = useState<Record<number, number>>({});
   const [quizFinished, setQuizFinished] = useState(false);
@@ -162,6 +162,9 @@ export default function Home() {
           <button type="button" onClick={() => setOpenReference(openReference === "notebook" ? null : "notebook")} aria-expanded={openReference === "notebook"} aria-controls="notebook">
             我的句型本 <span>Pattern Notebook</span>
           </button>
+          <button type="button" onClick={() => setOpenReference(openReference === "compo-components" ? null : "compo-components")} aria-expanded={openReference === "compo-components"} aria-controls="compo-components">
+            作文结构 <span>PSLE Compo Structure</span>
+          </button>
         </nav>
 
         {openReference === "learning-path" && (
@@ -214,6 +217,58 @@ export default function Home() {
                 <p className="card-en">{item.explanationEn}</p>
               </article>
             ))}
+          </div>
+        </section>
+        )}
+
+        {openReference === "compo-components" && (
+        <section id="compo-components" className="reference-section compo-section mb-6 scroll-mt-5">
+          <div className="reference-heading">
+            <div>
+              <p className="reference-kicker">从考试到文章 · From exam to story</p>
+              <h2>PSLE 华文作文的组成部分 <span>Components of PSLE Chinese Composition</span></h2>
+              <p>先了解考试要求，再用六个部分规划一篇完整、切题和通顺的作文。</p>
+              <p className="heading-en">Know the exam requirements first, then use six parts to plan a complete, relevant and fluent composition.</p>
+            </div>
+          </div>
+
+          <div className="exam-format-card">
+            <div className="exam-format-title">
+              <span>考试格式</span>
+              <div><h3>试卷一：写作</h3><p>Paper 1: Writing</p></div>
+            </div>
+            <div className="exam-format-grid">
+              <div><strong>50 分钟</strong><span>50 minutes</span></div>
+              <div><strong>40 分</strong><span>40 marks · 20%</span></div>
+              <div><strong>二选一</strong><span>Choose 1 of 2</span></div>
+              <div><strong>至少 100 字</strong><span>At least 100 Chinese characters</span></div>
+            </div>
+            <p className="exam-format-note">题目包括<strong>命题作文</strong>和<strong>看图作文</strong>，任选一题作答。考试时可使用考评局规定的词典。</p>
+            <p className="card-en">Choose either the topic-based composition or the picture composition. An SEAB-approved dictionary may be used.</p>
+            <a href="https://www.seab.gov.sg/psle/psle-formats-examined-in-2026/" target="_blank" rel="noreferrer">查看 2026 SEAB 考试格式 · View the official 2026 SEAB format</a>
+          </div>
+
+          <div className="compo-guide-heading">
+            <h3>建议的六部分写作结构</h3>
+            <p>Recommended six-part writing structure</p>
+          </div>
+          <div className="compo-grid">
+            {PSLE_COMPO_COMPONENTS.map((item) => (
+              <article key={item.number} className="compo-card">
+                <div className="compo-card-title">
+                  <span>{item.number}</span>
+                  <div><h3>{item.title}</h3><h4>{item.titleEn}</h4></div>
+                </div>
+                <div className="compo-question"><strong>想一想 · Ask</strong><p>{item.question}</p><small>{item.questionEn}</small></div>
+                <p className="compo-explanation">{item.explanation}</p>
+                <p className="card-en">{item.explanationEn}</p>
+              </article>
+            ))}
+          </div>
+          <div className="compo-reminder">
+            <strong>记住 · Remember</strong>
+            <p>这六个部分是规划方法，不是规定每篇作文一定要分成六段。重点是切题、内容完整和句子通顺。</p>
+            <small>This is a planning guide, not a rule that every composition must have exactly six paragraphs. Stay relevant, complete the story and write fluent sentences.</small>
           </div>
         </section>
         )}
