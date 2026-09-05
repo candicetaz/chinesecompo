@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { BookOpen, Check, ChevronRight, CircleHelp, Headphones, Lightbulb, RotateCcw, Sparkles, Target, Trophy } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Progress } from "@/components/ui/progress";
@@ -23,6 +23,9 @@ export default function Home() {
   const [quizQuestionIndex, setQuizQuestionIndex] = useState(0);
   const [quizAnswers, setQuizAnswers] = useState<Record<number, number>>({});
   const [quizFinished, setQuizFinished] = useState(false);
+  const [speechStatus, setSpeechStatus] = useState<"idle" | "preparing" | "playing" | "error" | "unsupported">("idle");
+  const speechRef = useRef<SpeechSynthesisUtterance | null>(null);
+  const speechTimerRef = useRef<number | null>(null);
   const lesson = LESSONS[selectedDay];
   const dailyQuiz = useMemo(() => getDailyQuiz(selectedDay), [selectedDay]);
   const quizQuestion = dailyQuiz[quizQuestionIndex];
@@ -53,6 +56,24 @@ export default function Home() {
     });
   }, [openReference]);
 
+  useEffect(() => {
+    if (!("speechSynthesis" in window)) {
+      setSpeechStatus("unsupported");
+      return;
+    }
+
+    const synth = window.speechSynthesis;
+    const loadVoices = () => synth.getVoices();
+    loadVoices();
+    synth.addEventListener("voiceschanged", loadVoices);
+    return () => {
+      if (speechTimerRef.current !== null) window.clearTimeout(speechTimerRef.current);
+      synth.removeEventListener("voiceschanged", loadVoices);
+      synth.cancel();
+      speechRef.current = null;
+    };
+  }, []);
+
   const readData = () => {
     try { return JSON.parse(window.localStorage.getItem(STORAGE_KEY) ?? "{}") as { completed?: number[]; drafts?: Record<string, string> }; }
     catch { return {}; }
@@ -63,6 +84,10 @@ export default function Home() {
     const drafts = data.drafts ?? {};
     drafts[String(selectedDay)] = ownSentence;
     window.localStorage.setItem(STORAGE_KEY, JSON.stringify({ completed, drafts }));
+    if (speechTimerRef.current !== null) window.clearTimeout(speechTimerRef.current);
+    if ("speechSynthesis" in window) window.speechSynthesis.cancel();
+    speechRef.current = null;
+    setSpeechStatus("idle");
     setSelectedDay(day);
     setOwnSentence(drafts[String(day)] ?? "");
     setArranged([]); setOrderStatus("idle"); setChosenVariation(0); setSaved(false);
@@ -80,11 +105,48 @@ export default function Home() {
   const structureColors = useMemo(() => ["chunk-yellow", "chunk-blue", "chunk-coral", "chunk-green"], []);
 
   const speak = () => {
-    if (!("speechSynthesis" in window)) return;
-    window.speechSynthesis.cancel();
-    const voice = new SpeechSynthesisUtterance(lesson.sentence);
-    voice.lang = "zh-CN"; voice.rate = 0.78;
-    window.speechSynthesis.speak(voice);
+    if (!("speechSynthesis" in window) || !("SpeechSynthesisUtterance" in window)) {
+      setSpeechStatus("unsupported");
+      return;
+    }
+
+    const synth = window.speechSynthesis;
+    const startSpeaking = () => {
+      speechTimerRef.current = null;
+      const utterance = new SpeechSynthesisUtterance(lesson.sentence);
+      const voices = synth.getVoices();
+      const chineseVoice = voices.find((item) => item.lang.toLowerCase() === "zh-sg")
+        ?? voices.find((item) => item.lang.toLowerCase() === "zh-cn")
+        ?? voices.find((item) => item.lang.toLowerCase().startsWith("zh"));
+
+      if (chineseVoice) utterance.voice = chineseVoice;
+      utterance.lang = chineseVoice?.lang ?? "zh-CN";
+      utterance.rate = 0.78;
+      utterance.pitch = 1;
+      utterance.onstart = () => setSpeechStatus("playing");
+      utterance.onend = () => {
+        setSpeechStatus("idle");
+        speechRef.current = null;
+      };
+      utterance.onerror = () => {
+        setSpeechStatus("error");
+        speechRef.current = null;
+      };
+
+      speechRef.current = utterance;
+      if (synth.paused) synth.resume();
+      synth.speak(utterance);
+    };
+
+    if (speechTimerRef.current !== null) window.clearTimeout(speechTimerRef.current);
+    setSpeechStatus("preparing");
+
+    if (synth.speaking || synth.pending) {
+      synth.cancel();
+      speechTimerRef.current = window.setTimeout(startSpeaking, 120);
+    } else {
+      startSpeaking();
+    }
   };
 
   const checkOrder = () => {
@@ -285,7 +347,18 @@ export default function Home() {
           <div className="grid gap-6 lg:grid-cols-[minmax(0,1fr)_330px] lg:items-start">
           <div className="space-y-6">
             <Panel step="1" title="学一句" subtitle="先听，再大声读三遍。">
-              <div className="sentence-paper"><p className="model-sentence">{lesson.sentence}</p><Button onClick={speak} className="listen-button"><Headphones className="h-5 w-5" /> 听一听</Button></div>
+              <div className="sentence-paper">
+                <p className="model-sentence">{lesson.sentence}</p>
+                <div className="listen-control">
+                  <Button type="button" onClick={speak} className="listen-button"><Headphones className="h-5 w-5" /> {speechStatus === "playing" ? "正在播放…" : speechStatus === "preparing" ? "准备中…" : "听一听"}</Button>
+                  <p className={`listen-status ${speechStatus === "error" || speechStatus === "unsupported" ? "listen-status-error" : ""}`} aria-live="polite">
+                    {speechStatus === "playing" && "正在播放 · Playing"}
+                    {speechStatus === "preparing" && "正在准备语音 · Preparing audio"}
+                    {speechStatus === "error" && "无法播放。请检查媒体音量，再试一次。 · Unable to play. Check the media volume and try again."}
+                    {speechStatus === "unsupported" && "这个浏览器不支持语音播放。请用 Chrome 或 Safari。 · Please open this page in Chrome or Safari."}
+                  </p>
+                </div>
+              </div>
             </Panel>
 
             <Panel step="2" title="拆一句" subtitle="看看每一部分负责什么。">
