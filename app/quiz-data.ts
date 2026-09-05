@@ -75,6 +75,55 @@ const CUSTOM_QUIZZES: CustomQuestion[][] = [
     ["帮助对方以后，可以怎样表现关心？", "How can care be shown after helping?", "询问对方有没有受伤", "马上跑走不理会", "只描写天气", "重复写下课时间", "想一想还可以对对方说什么。 / Think about what you can ask the person.", "询问对方的情况能表现体贴和关心。 / Asking about the person shows care and concern."],
     ["哪一个顺序最适合这周的小段落？", "Which order best suits this week’s short paragraph?", "时间＋发现问题＋采取行动＋关心对方", "关心对方＋结果＋时间＋发现问题", "采取行动＋时间＋无关资料＋发现问题", "结果＋结果＋时间＋时间", "事情应从开端自然发展到行动和关心。 / Move from the beginning to action and care.", "这个顺序让小段落发展自然、内容完整。 / This order makes the paragraph logical and complete."],
   ],
+  [
+    ["怎样把‘扔球向小明’改得最自然？", "What is the most natural correction for ‘扔球向小明’?", "把球扔向小明", "把向小明球扔", "扔向球小明", "球向扔小明", "‘把’后先放物品，再写动作和目标。 / After 把, place the object before the action and target.", "‘把球扔向小明’符合把字句的正确顺序。 / It follows the correct 把 sentence order."],
+    ["球碰到人的头，哪个动词最合适？", "Which verb best describes a ball hitting someone’s head?", "砸中", "扎到", "喝到", "听到", "球不是尖锐的东西。 / A ball is not a sharp object.", "球可以‘砸中’或‘打中’目标；‘扎到’通常用于尖锐物品。 / A ball can 砸中 or 打中 a target; 扎到 is normally used for something sharp."],
+    ["哪一句把方向和目标写清楚？", "Which sentence clearly shows the direction and target?", "弟弟把球踢向球门。", "弟弟踢球门向球。", "向弟弟球门踢把球。", "球门弟弟把向踢。", "找出‘人物＋把球＋踢向哪里’。 / Find Who + 把 ball + kicked towards where.", "这句话清楚交代人物、物品、动作和目标。 / It clearly gives the person, object, action and target."],
+    ["怎样自然地连接意外结果？", "How can an unexpected result be linked naturally?", "没想到球竟然砸中了小明的头。", "所以没想到球小明头。", "球竟然因为小明。", "小明的头向球没想到。", "用‘没想到’带出出乎意料的结果。 / Use 没想到 to introduce an unexpected result.", "‘没想到……’能自然地连接动作和意外结果。 / 没想到 naturally links the action to the unexpected result."],
+    ["哪一句最完整、最通顺？", "Which sentence is the most complete and fluent?", "小华把球扔向小明，没想到球砸中了小明的头。", "小华扔球向小明，扎到他的头。", "球小华向小明扔，头砸中。", "小明的头扔向小华的球。", "检查方向、动词和结果是否都正确。 / Check the direction, verb and result.", "正确句子使用‘把球扔向’，并用‘砸中’说明结果。 / The correct sentence uses 把球扔向 and 砸中 for the result."],
+  ],
+  [
+    ["哪一句的‘向’位置正确？", "Which sentence places 向 correctly?", "我快步向老师走去。", "我快步老师走去向。", "向我快步走去老师。", "我向走去快步老师。", "‘向＋目标’通常放在主要动作前。 / 向 + target usually comes before the main action.", "‘向老师’放在动作‘走去’前，语序自然。 / 向老师 comes before 走去."],
+    ["‘朝校门跑去’中的‘朝校门’表示什么？", "What does 朝校门 show in the phrase 朝校门跑去?", "动作的方向", "事情的时间", "人物的心情", "动作的结果", "想一想人物朝哪里跑。 / Think about where the person is running towards.", "‘朝校门’说明跑动的方向和目标。 / It shows the direction and target of the action."],
+    ["哪一句表示小狗跑向主人？", "Which sentence means the dog ran towards its owner?", "小狗兴奋地朝主人奔去。", "小狗主人奔去朝兴奋。", "主人朝小狗兴奋奔去。", "小狗奔去主人兴奋地朝。", "使用‘人物／动物＋朝＋目标＋动作’。 / Use subject + 朝 + target + action.", "‘朝主人奔去’清楚写出方向和动作。 / 朝主人奔去 clearly shows direction and action."],
+    ["要写‘walk towards the teacher’，哪一个最自然？", "Which is the most natural Chinese for ‘walk towards the teacher’?", "向老师走去", "走去老师向", "老师走向去", "走老师去向", "中文通常先写方向目标，再写动作。 / Chinese normally places the directional target before the action.", "‘向老师＋走去’是自然的中文顺序。 / 向老师 + 走去 is the natural order."],
+    ["哪一句同时写出原因、人物、方向和动作？", "Which sentence includes cause, person, direction and action?", "看见校门快关了，我连忙朝校门跑去。", "我跑去，校门朝看见快关了。", "朝校门我看见，快关跑去。", "校门跑去，我连忙看见朝。", "先交代原因，再写人物向哪里做什么。 / Give the cause, then who moved towards where.", "这句话按‘原因＋人物＋方向＋动作’排列。 / It follows Cause + Who + Direction + Action."],
+  ],
+  [
+    ["篮球碰到肩膀，应该用哪个词？", "Which word should be used when a basketball hits a shoulder?", "砸中", "扎到", "淋湿", "摔破", "根据篮球的动作选择动词。 / Choose a verb that matches the basketball’s action.", "篮球可以‘砸中’肩膀。 / A basketball can 砸中 a shoulder."],
+    ["尖刺碰到手指，应该用哪个词？", "Which word should be used when a thorn pricks a finger?", "扎到", "砸中", "淋湿", "打翻", "尖锐的东西通常怎样伤到手？ / What verb is used for something sharp?", "尖刺或针会‘扎到’手指。 / A thorn or needle can 扎到 a finger."],
+    ["雨水使衣服变湿，应该用哪个词？", "Which word describes rain making clothes wet?", "淋湿", "砸中", "扎到", "撞倒", "找出和雨水最常搭配的动词。 / Find the verb commonly paired with rain.", "雨水会‘淋湿’衣服。 / Rain can 淋湿 clothes."],
+    ["不小心碰倒水杯，应该怎样写？", "How should knocking over a cup accidentally be written?", "不小心打翻了水杯", "不小心扎到了水杯", "不小心淋湿了水杯", "不小心听到了水杯", "水杯倒下并洒出水时用什么动词？ / Which verb describes a cup being knocked over?", "‘打翻水杯’是常见而准确的搭配。 / 打翻水杯 is a common and accurate collocation."],
+    ["为什么不能把所有英文‘hit’都翻成同一个中文词？", "Why can’t every English ‘hit’ use the same Chinese verb?", "中文动词要配合物品和动作方式", "中文没有不同的动词", "每个句子都只能用‘打’", "动词放在哪里都一样", "比较球、尖刺、雨水和水杯。 / Compare a ball, thorn, rain and cup.", "中文会根据物品和动作选择‘砸中、扎到、淋湿、打翻’等不同动词。 / Chinese selects different verbs according to the object and action."],
+  ],
+  [
+    ["‘打翻了水杯’中的‘翻’说明什么？", "What does 翻 show in 打翻了水杯?", "动作造成的结果", "事情发生的地点", "人物的姓名", "说话的语气", "水杯经过动作后变成怎样？ / What happened to the cup after the action?", "‘翻’说明水杯被碰倒的结果。 / 翻 shows the result of the action."],
+    ["哪一句清楚写出作业的结果？", "Which sentence clearly states what happened to the homework?", "水把桌上的作业弄湿了。", "水和作业在桌上。", "作业水桌上弄。", "桌上的作业有水。", "找出‘作业最后变成怎样’。 / Find what the homework became like.", "‘弄湿了’清楚说明作业受到的影响。 / 弄湿了 clearly states the result."],
+    ["盘子掉到地上后破了，哪个结果词最合适？", "Which result word best describes a plate breaking after it falls?", "摔破了", "淋湿了", "吓跑了", "扶起了", "选择能说明盘子破掉的词。 / Choose the word showing that the plate broke.", "‘摔破了’同时写出动作和破掉的结果。 / 摔破了 gives both the action and result."],
+    ["哪一句使用‘弄脏’最正确？", "Which sentence uses 弄脏 correctly?", "妹妹踩进泥坑，把新鞋弄脏了。", "妹妹把泥坑听脏了。", "新鞋把妹妹弄进泥坑。", "泥坑妹妹新鞋弄脏把。", "谁的什么东西最后变脏了？ / Whose object became dirty?", "妹妹的鞋受到影响，所以用‘把新鞋弄脏了’。 / The shoes were affected, so 把新鞋弄脏了 is correct."],
+    ["哪一句既有动作，也有清楚结果？", "Which sentence contains both an action and a clear result?", "弟弟打翻水杯，把作业弄湿了。", "弟弟、水杯和作业。", "弟弟做了一件事情。", "水杯在桌上，作业也在桌上。", "找出两个完成的动作结果。 / Find two completed action results.", "‘打翻’和‘弄湿’让读者知道两个动作的结果。 / 打翻 and 弄湿 clearly show both results."],
+  ],
+  [
+    ["哪一句的‘他’最容易让人不清楚指谁？", "In which sentence is 他 unclear?", "小杰看见伟明拿着很多书，他便过去帮他。", "小杰拿着自己的书。", "伟明把书放在桌上。", "老师请小杰坐下。", "找出一句同时出现两个人和两个‘他’。 / Find the sentence with two people and two uses of 他.", "句中有小杰和伟明，两个‘他’可能让读者混淆。 / With two boys in the sentence, both uses of 他 may confuse the reader."],
+    ["怎样把人物写得最清楚？", "How can the characters be made clearest?", "小杰看见伟明拿着很多书，便过去帮伟明拿了几本。", "小杰看见伟明，他帮他。", "他看见他，所以他帮他。", "伟明小杰书他几本。", "在关键动作处重复人物名字。 / Repeat the person’s name at the key action.", "重复‘伟明’后，谁帮助谁就很清楚。 / Repeating 伟明 makes it clear who helped whom."],
+    ["‘小明看见志强跌倒，便跑过去扶起志强’中，谁跌倒了？", "Who fell in this sentence?", "志强", "小明", "两个人都跌倒", "句子没有说明", "看‘跌倒’紧跟在哪个人物后面。 / See which name is immediately followed by 跌倒.", "‘志强跌倒’清楚说明跌倒的人是志强。 / 志强跌倒 clearly identifies Zhijiang."],
+    ["哪一句清楚说明妹妹听了妈妈的提醒？", "Which sentence clearly shows that the sister followed Mum’s reminder?", "妈妈提醒妹妹带伞，妹妹立刻把雨伞放进书包。", "妈妈提醒妹妹带伞，她把它放了。", "她提醒她，她放进它。", "妹妹妈妈雨伞她书包。", "第二个动作前重新写出人物。 / Name the person again before the second action.", "第二次写‘妹妹’，读者就知道是谁把伞放进书包。 / Naming 妹妹 again makes the action clear."],
+    ["什么时候可以使用‘他／她’？", "When can 他 or 她 be used clearly?", "读者能确定代词指的是谁时", "句中出现很多人物时随便使用", "不想写人物名字时全部使用", "每句话开头都必须使用", "代词的对象必须明确。 / The pronoun’s referent must be clear.", "只有当读者能确定所指人物时，代词才不会造成混淆。 / Use a pronoun only when the reader can identify the person clearly."],
+  ],
+  [
+    ["哪一组关联词表示原因和结果？", "Which connector pair shows cause and result?", "因为……所以……", "虽然……但是……", "不但……而且……", "一边……一边……", "前半句说明原因，后半句说明结果。 / The first clause gives a cause and the second gives a result.", "‘因为……所以……’连接原因和结果。 / 因为…所以… links a cause to its result."],
+    ["填入最合适的词：___地面湿滑，小文不小心滑倒了。", "Choose the best word: ___ the ground was slippery, Xiaowen slipped.", "由于", "幸好", "但是", "而且", "句子开头要带出原因。 / The beginning should introduce a cause.", "‘由于’可以放在原因前面。 / 由于 can introduce the cause."],
+    ["哪个词最适合带出意外结果？", "Which phrase best introduces an unexpected result?", "没想到", "因为", "一边", "不但", "结果和原先预料的不一样。 / The result differs from what was expected.", "‘没想到’表示结果出乎意料。 / 没想到 introduces an unexpected result."],
+    ["哪个词表示事情出现了好转？", "Which word shows that the situation turned out better?", "幸好", "由于", "因此", "首先", "后来有人及时提供帮助。 / Someone helped in time afterward.", "‘幸好’带出令人放心的转折。 / 幸好 introduces a fortunate turn."],
+    ["哪一句的原因和结果连接正确？", "Which sentence links cause and result correctly?", "因为我没有看清路面，所以不小心踩进了水坑。", "因为我没有看清路面，但是踩进水坑所以。", "所以没有看清，因为我路面水坑。", "我水坑因为踩进所以路面。", "检查‘因为’和‘所以’后的内容。 / Check the clauses after 因为 and 所以.", "原因是没有看清路面，结果是踩进水坑，连接自然。 / Not seeing the ground is the cause; stepping into the puddle is the result."],
+  ],
+  [
+    ["怎样改正‘我跑很快向弟弟’？", "How should ‘我跑很快向弟弟’ be corrected?", "我连忙向弟弟跑去。", "我跑弟弟很快向。", "向我弟弟跑很快。", "弟弟跑向我很快。", "方向目标要放在主要动作前。 / Place the directional target before the main action.", "‘连忙＋向弟弟＋跑去’的顺序自然。 / 连忙 + 向弟弟 + 跑去 is natural."],
+    ["哪一个动词和‘球碰到肩膀’搭配正确？", "Which verb correctly matches a ball hitting a shoulder?", "砸中肩膀", "扎到肩膀", "淋湿肩膀", "摔破肩膀", "回想不同物品要使用不同动词。 / Recall that different objects require different verbs.", "球可以‘砸中’或‘打中’肩膀。 / A ball can 砸中 or 打中 a shoulder."],
+    ["哪一句同时有正确方向和清楚结果？", "Which sentence has correct direction and a clear result?", "小文把球踢向墙壁，球反弹回来打翻了水瓶。", "小文踢球墙壁向，水瓶扎到。", "墙壁把球小文踢，水瓶反弹。", "球向小文墙壁，打翻回来。", "先检查‘把球踢向’，再检查结果动词。 / Check 把球踢向 first, then the result verb.", "方向用‘踢向’，结果用‘打翻’，两部分都清楚。 / 踢向 shows direction and 打翻 shows the result."],
+    ["哪一句的人物最清楚？", "Which sentence makes the characters clearest?", "小华闯了祸，便马上向同学道歉。", "小华告诉同学，他闯祸后他向他道歉。", "他看见他，所以他找他。", "同学小华他道歉他。", "检查每个动作是谁做的。 / Check who performs each action.", "句子清楚说明闯祸和道歉的人都是小华。 / It clearly shows that Xiaohua caused the problem and apologised."],
+    ["哪一句最适合作为第二周总结范句？", "Which sentence best summarises Week 2 skills?", "下课时，小华把球扔向同学，没想到球砸中了对方的肩膀，他立刻上前道歉。", "下课小华扔球向同学，扎到他肩膀道歉。", "球同学向小华扔，肩膀没想到。", "小华下课肩膀球向同学。", "检查时间、方向、动词、结果和回应。 / Check time, direction, verb, result and response.", "这句话把第二周的五个重点连成完整、通顺的句子。 / It combines the five Week 2 skills into one clear sentence."],
+  ],
 ];
 
 const ROLE_POOL = [
