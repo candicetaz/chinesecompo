@@ -104,11 +104,11 @@ const CUSTOM_QUIZZES: CustomQuestion[][] = [
     ["哪一句既有动作，也有清楚结果？", "Which sentence contains both an action and a clear result?", "弟弟打翻水杯，把作业弄湿了。", "弟弟、水杯和作业。", "弟弟做了一件事情。", "水杯在桌上，作业也在桌上。", "找出两个完成的动作结果。 / Find two completed action results.", "‘打翻’和‘弄湿’让读者知道两个动作的结果。 / 打翻 and 弄湿 clearly show both results."],
   ],
   [
-    ["哪一句的‘他’最容易让人不清楚指谁？", "In which sentence is 他 unclear?", "小杰看见伟明拿着很多书，他便过去帮他。", "小杰拿着自己的书。", "伟明把书放在桌上。", "老师请小杰坐下。", "找出一句同时出现两个人和两个‘他’。 / Find the sentence with two people and two uses of 他.", "句中有小杰和伟明，两个‘他’可能让读者混淆。 / With two boys in the sentence, both uses of 他 may confuse the reader."],
-    ["怎样把人物写得最清楚？", "How can the characters be made clearest?", "小杰看见伟明拿着很多书，便过去帮伟明拿了几本。", "小杰看见伟明，他帮他。", "他看见他，所以他帮他。", "伟明小杰书他几本。", "在关键动作处重复人物名字。 / Repeat the person’s name at the key action.", "重复‘伟明’后，谁帮助谁就很清楚。 / Repeating 伟明 makes it clear who helped whom."],
-    ["‘小明看见志强跌倒，便跑过去扶起志强’中，谁跌倒了？", "Who fell in this sentence?", "志强", "小明", "两个人都跌倒", "句子没有说明", "看‘跌倒’紧跟在哪个人物后面。 / See which name is immediately followed by 跌倒.", "‘志强跌倒’清楚说明跌倒的人是志强。 / 志强跌倒 clearly identifies Zhijiang."],
-    ["哪一句清楚说明妹妹听了妈妈的提醒？", "Which sentence clearly shows that the sister followed Mum’s reminder?", "妈妈提醒妹妹带伞，妹妹立刻把雨伞放进书包。", "妈妈提醒妹妹带伞，她把它放了。", "她提醒她，她放进它。", "妹妹妈妈雨伞她书包。", "第二个动作前重新写出人物。 / Name the person again before the second action.", "第二次写‘妹妹’，读者就知道是谁把伞放进书包。 / Naming 妹妹 again makes the action clear."],
-    ["什么时候可以使用‘他／她’？", "When can 他 or 她 be used clearly?", "读者能确定代词指的是谁时", "句中出现很多人物时随便使用", "不想写人物名字时全部使用", "每句话开头都必须使用", "代词的对象必须明确。 / The pronoun’s referent must be clear.", "只有当读者能确定所指人物时，代词才不会造成混淆。 / Use a pronoun only when the reader can identify the person clearly."],
+    ["填入正确的字：这是一本有趣＿故事书。", "Choose the correct word: This is an interesting storybook.", "的", "地", "得", "了", "形容内容放在名词‘故事书’前。 / The description comes before the noun 故事书.", "名词前的形容内容通常用‘的’。 / 的 normally links a description to a noun."],
+    ["填入正确的字：妹妹认真＿读书。", "Choose the correct word: Sister reads attentively.", "地", "的", "得", "着", "‘认真’说明她怎样进行动作‘读’。 / 认真 explains how she performs the action 读.", "动作前说明方式时用‘地’。 / Use 地 before an action to show how it is done."],
+    ["填入正确的字：弟弟跑＿很快。", "Choose the correct word: Brother runs very quickly.", "得", "的", "地", "把", "‘很快’放在动作‘跑’后，说明动作的程度。 / 很快 follows 跑 and describes its degree.", "动作后说明程度时用‘得’。 / Use 得 after an action to describe its degree."],
+    ["哪一句的‘的、地、得’全部正确？", "Which sentence uses 的, 地 and 得 correctly?", "小华用力地扔球，球飞得很高，落在远处的草地上。", "小华用力的扔球，球飞地很高，落在远处得草地上。", "小华用力得扔球，球飞的很高，落在远处地草地上。", "小华用力地扔球，球飞的很高，落在远处得草地上。", "动作前用‘地’，动作后用‘得’，名词前用‘的’。 / Use 地 before an action, 得 after an action and 的 before a noun.", "‘用力地扔、飞得很高、远处的草地’三处都正确。 / All three phrases use the correct word."],
+    ["怎样改正‘他开心的笑了，跑地很快’？", "How should ‘他开心的笑了，跑地很快’ be corrected?", "他开心地笑了，跑得很快。", "他开心的笑了，跑地很快。", "他开心得笑了，跑的很快。", "他开心地笑了，跑的很快。", "笑是动作；‘很快’放在跑的后面。 / 笑 is an action; 很快 comes after 跑.", "动作前用‘地’，动作后的程度用‘得’。 / Use 地 before the action and 得 before the degree after it."],
   ],
   [
     ["哪一组关联词表示原因和结果？", "Which connector pair shows cause and result?", "因为……所以……", "虽然……但是……", "不但……而且……", "一边……一边……", "前半句说明原因，后半句说明结果。 / The first clause gives a cause and the second gives a result.", "‘因为……所以……’连接原因和结果。 / 因为…所以… links a cause to its result."],
