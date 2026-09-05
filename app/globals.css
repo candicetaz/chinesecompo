@@ -43,7 +43,7 @@ button, textarea { font: inherit; }
 .day-button:hover { transform:translateY(-2px); border-color:#8db2f6; }
 .day-button-active { border-color:#185adb; background:#eaf1ff; color:#185adb; box-shadow:0 5px 0 #185adb; transform:translateY(-3px); }
 .day-check { position:absolute; right:.35rem; top:.35rem; height:1rem; width:1rem; border-radius:50%; background:#19a974; color:white; padding:2px; }
-.day-skill { margin-top:.15rem; font-size:.8rem; font-weight:950; }
+.day-skill { margin-top:.15rem; font-size:.75rem; font-weight:850; line-height:1.15; text-align:center; }
 
 .lesson-panel,.side-card { border:1px solid #dce4ef; border-radius:1.5rem; background:white; box-shadow:0 8px 24px rgba(31,55,87,.07); }
 .lesson-panel,.side-card { padding:1.25rem; }
