@@ -545,6 +545,23 @@ export default function Home() {
                   <div className="notebook-example"><b>例句 Example</b><p>{item.example}</p></div>
                   <p>{item.explanation}</p>
                   <p className="card-en">{item.explanationEn}</p>
+                  {item.howPractice && (
+                    <div className="notebook-how-practice">
+                      <h4>{item.howPractice.title}<span>{item.howPractice.titleEn}</span></h4>
+                      <div className="notebook-pattern"><b>记住这个公式 · Remember</b><p>{item.howPractice.rule}</p><small>{item.howPractice.ruleEn}</small></div>
+                      <p>{item.howPractice.instruction}</p>
+                      <p className="card-en">{item.howPractice.instructionEn}</p>
+                      <div className="how-builder" role="table" aria-label="谁、怎么样地、做什么的例子">
+                        <div className="how-builder-heading" role="row"><span role="columnheader">谁 Who</span><span role="columnheader">怎么样地 How</span><span role="columnheader">做什么 Action</span></div>
+                        {item.howPractice.examples.map((example) => (
+                          <div className="how-builder-row" role="row" key={`${example.who}-${example.action}`}><span role="cell">{example.who}</span><span role="cell">{example.how}</span><span role="cell">{example.action}</span></div>
+                        ))}
+                      </div>
+                      <div className="how-example"><b>完整例句 · Complete example</b><p>他背起书包，兴高采烈地去上学。</p></div>
+                      <div className="phrase-bank"><b>可直接记住的短语 · Reusable phrases</b><div>{item.howPractice.phrases.map((phrase) => <span key={phrase}>{phrase}</span>)}</div></div>
+                      <div className="exception-note"><p>{item.howPractice.exception}</p><small>{item.howPractice.exceptionEn}</small></div>
+                    </div>
+                  )}
                 </div>
               </details>
             ))}
