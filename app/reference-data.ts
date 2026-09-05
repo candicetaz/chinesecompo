@@ -93,6 +93,63 @@ export const LANGUAGE_DIFFERENCES = [
   },
 ];
 
+export const PSLE_COMPO_COMPONENTS = [
+  {
+    number: 1,
+    title: "审题与选材",
+    titleEn: "Understand the Question and Choose the Story",
+    question: "题目要我写什么？谁是主角？事情为什么发生？",
+    questionEn: "What must I write about? Who is the main character? Why did the event happen?",
+    explanation: "圈出题目或图片中的重点，决定故事的中心，再选出与中心有关的情节。",
+    explanationEn: "Identify the key details in the title or pictures, decide the main idea, and use only events that support it.",
+  },
+  {
+    number: 2,
+    title: "开头",
+    titleEn: "Opening",
+    question: "什么时候？谁？在哪里？正在做什么？",
+    questionEn: "When? Who? Where? What was happening?",
+    explanation: "用两三句话交代背景，让读者很快明白故事从哪里开始。",
+    explanationEn: "Use two or three sentences to set the scene so the reader quickly understands where the story begins.",
+  },
+  {
+    number: 3,
+    title: "事情发展",
+    titleEn: "Development",
+    question: "先发生什么？接着发生什么？",
+    questionEn: "What happened first? What happened next?",
+    explanation: "按照先后顺序写清楚人物的动作，让每一句自然地带出下一句。",
+    explanationEn: "Describe the character's actions in sequence, with each sentence leading naturally to the next.",
+  },
+  {
+    number: 4,
+    title: "高潮或问题",
+    titleEn: "Climax or Main Problem",
+    question: "最重要的问题是什么？人物有什么反应？",
+    questionEn: "What was the main problem? How did the character react?",
+    explanation: "这是故事最紧张或最重要的部分。加入动作、对话和心情，让情节更完整。",
+    explanationEn: "This is the most important or tense part. Add actions, dialogue and feelings to make it complete.",
+  },
+  {
+    number: 5,
+    title: "解决与结尾",
+    titleEn: "Solution and Ending",
+    question: "问题怎样解决？最后有什么结果或感想？",
+    questionEn: "How was the problem solved? What was the result or reflection?",
+    explanation: "交代事情的结果，并写一个与故事有关的感想；不要突然结束。",
+    explanationEn: "State the result and add a reflection connected to the story; do not end abruptly.",
+  },
+  {
+    number: 6,
+    title: "检查与修改",
+    titleEn: "Check and Improve",
+    question: "切题吗？句子通顺吗？标点和人物清楚吗？",
+    questionEn: "Is it relevant? Are the sentences fluent? Are punctuation and characters clear?",
+    explanation: "最后慢慢读一遍，改正不通顺的句子、错别字、漏字和不清楚的“他／她”。",
+    explanationEn: "Read it slowly once more. Fix awkward sentences, incorrect or missing characters, and unclear uses of 他 or 她.",
+  },
+];
+
 export const NOTEBOOK_CATEGORIES = [
   {
     number: 1,
