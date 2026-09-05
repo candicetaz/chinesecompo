@@ -179,7 +179,7 @@ export default function Home() {
             <div><p className="text-xl font-black text-white">句句通</p><p className="text-sm text-blue-100">每日一句，写得通顺</p></div>
           </div>
           <div className="hidden items-center gap-2 rounded-full bg-white/10 px-4 py-2 text-sm font-semibold text-white sm:flex">
-            <Trophy className="h-4 w-4 text-yellow-300" />本周 {completed.length} / 7 天
+            <Trophy className="h-4 w-4 text-yellow-300" />学习进度 {completed.length} / {LESSONS.length} 天
           </div>
         </div>
       </header>
@@ -196,21 +196,34 @@ export default function Home() {
               </div>
             </div>
             <div className="rounded-2xl border border-white/20 bg-white/10 p-4">
-              <div className="mb-2 flex justify-between text-sm font-bold text-white"><span>本周进度</span><span>{progress}%</span></div>
+              <div className="mb-2 flex justify-between text-sm font-bold text-white"><span>14 天进度</span><span>{progress}%</span></div>
               <Progress value={progress} className="h-3 bg-white/15 [&>div]:bg-yellow-300" />
               <p className="mt-3 text-sm leading-6 text-blue-100">完成后，句子会自动收藏在这台设备上。</p>
             </div>
           </div>
         </section>
 
-        <nav aria-label="选择练习日" className="week-strip mb-6">
-          {LESSONS.map((item, index) => (
-            <button key={item.day} type="button" onClick={() => changeDay(index)} className={`day-button ${selectedDay === index ? "day-button-active" : ""}`} aria-current={selectedDay === index ? "page" : undefined}>
-              <span className="text-xs font-bold opacity-60">星期</span><span className="text-lg font-black">{item.day}</span>
-              {completed.includes(index) && <Check className="day-check" aria-label="已完成" />}
-            </button>
+        <div className="week-picker mb-6">
+          {[
+            { title: "第一周 · Week 1", subtitle: "句子基础 · Sentence Basics", start: 0, end: 7 },
+            { title: "第二周 · Week 2", subtitle: "句子纠错 · Sentence Repair", start: 7, end: 14 },
+          ].map((week) => (
+            <section key={week.start} className="week-group">
+              <div className="week-group-heading"><strong>{week.title}</strong><span>{week.subtitle}</span></div>
+              <nav aria-label={`${week.title} 选择练习日`} className="week-strip">
+                {LESSONS.slice(week.start, week.end).map((item, offset) => {
+                  const index = week.start + offset;
+                  return (
+                    <button key={item.day} type="button" onClick={() => changeDay(index)} className={`day-button ${selectedDay === index ? "day-button-active" : ""}`} aria-current={selectedDay === index ? "page" : undefined}>
+                      <span className="text-xs font-bold opacity-60">第 {index + 1} 天</span><span className="day-skill">{index < 7 ? "基础" : "纠错"}</span>
+                      {completed.includes(index) && <Check className="day-check" aria-label="已完成" />}
+                    </button>
+                  );
+                })}
+              </nav>
+            </section>
           ))}
-        </nav>
+        </div>
 
         <nav className="reference-nav mb-6" aria-label="学习工具">
           <a href="#daily-practice">每日练习 <span>Daily Practice</span></a>
