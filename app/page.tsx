@@ -214,8 +214,8 @@ export default function Home() {
                 {LESSONS.slice(week.start, week.end).map((item, offset) => {
                   const index = week.start + offset;
                   return (
-                    <button key={item.day} type="button" onClick={() => changeDay(index)} className={`day-button ${selectedDay === index ? "day-button-active" : ""}`} aria-current={selectedDay === index ? "page" : undefined}>
-                      <span className="text-xs font-bold opacity-60">第 {index + 1} 天</span><span className="day-skill">{index < 7 ? "基础" : "纠错"}</span>
+                    <button key={item.day} type="button" onClick={() => changeDay(index)} className={`day-button ${selectedDay === index ? "day-button-active" : ""}`} aria-label={`第 ${index + 1} 天`} aria-current={selectedDay === index ? "page" : undefined}>
+                      <span className="text-lg font-black">{index + 1}</span><span className="day-skill">{index < 7 ? "基础" : "纠错"}</span>
                       {completed.includes(index) && <Check className="day-check" aria-label="已完成" />}
                     </button>
                   );
